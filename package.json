@@ -1,0 +1,27 @@
+{
+  "name": "airdrop",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsup src/* --watch --dts",
+    "build": "tsup src/* --dts",
+    "run": "node dist/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^18.15.11",
+    "tsup": "^6.7.0",
+    "typescript": "^5.0.4"
+  },
+  "dependencies": {
+    "@metaplex-foundation/js": "^0.18.3",
+    "@project-serum/anchor": "^0.26.0",
+    "@solana/web3.js": "^1.75.0",
+    "bs58": "^5.0.0",
+    "dotenv": "^16.0.3"
+  }
+}
