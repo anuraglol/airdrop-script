@@ -46,14 +46,17 @@ const airdropOne = async (owner: string) => {
 };
 
 const airdropAll = async () => {
-  const path = "./data/csvjson1.json";
+  const path = "./data/csvjson1-left.json";
   const data = fs.readFileSync(path, "utf8");
   const json = JSON.parse(data.toString());
 
-  const batch1 = json.slice(75, 90);
+  const batch1 = json.slice(10, 20);
 
   await Promise.all(
     batch1.map(async (item: any) => {
+      if (item["POAP Sent?"] === "TRUE") {
+        return;
+      }
       const nft = await airdropOne(item.wallet_address);
 
       for (let i = 0; i < batch1.length; i++) {
@@ -73,23 +76,7 @@ const airdropAll = async () => {
   );
 };
 
-// airdropAll();
-
-const manualUpdate = async () => {
-  const path = "./data/csvjson1.json";
-  const data = fs.readFileSync(path, "utf8");
-  const json = JSON.parse(data.toString());
-
-  const batch1 = json.slice(0, 15);
-
-  for (let i = 0; i < batch1.length; i++) {
-    batch1[i]["POAP Sent?"] = "TRUE";
-    json[i]["POAP Sent?"] = "TRUE";
-  }
-
-  fs.writeFileSync(path, JSON.stringify(json, null, 2), "utf-8");
-  console.log("Updated");
-};
+airdropAll();
 
 const howManyLeft = async () => {
   const path = "./data/csvjson1.json";
@@ -108,6 +95,4 @@ const howManyLeft = async () => {
   console.log(batch1.length);
 };
 
-howManyLeft();
-
-// manualUpdate();
+// howManyLeft();
